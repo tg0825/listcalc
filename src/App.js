@@ -9,12 +9,90 @@ import './App.scss';
 class App extends Component {
     constructor(props) {
         super(props);
+
         this.inputSubmit = this.inputSubmit.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
     }
 
     state = {
         itemList: [
+            {
+                name: '커피',
+                price: '1000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '커피',
+                price: '1000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '커피',
+                price: '1000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '커피',
+                price: '1000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '커피',
+                price: '1000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '커피',
+                price: '1000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '커피',
+                price: '1000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '커피',
+                price: '1000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
+            {
+                name: '점심',
+                price: '2000'
+            },
             {
                 name: '커피',
                 price: '1000'
@@ -37,13 +115,21 @@ class App extends Component {
         });
     }
 
+    handleRemove(e, index) {
+        this.setState({
+            itemList: update(this.state.itemList,
+                {
+                    $splice: [[index, 1]]
+                }
+            )
+        })
+    }
+
     handleEdit(name, value, index) {
         this.setState({
-            itemList: update(
-                this.state.itemList,
-                {
+            itemList: update(this.state.itemList, {
                     [index]: {
-                        name: {$set: value},
+                        [name]: {$set: value},
                     }
                 }
             )
@@ -56,9 +142,12 @@ class App extends Component {
                 <List
                     itemList={this.state.itemList}
                     handleEdit={this.handleEdit}
-                />
-                <Result itemList={this.state.itemList}/>
-                <Input inputSubmit={this.inputSubmit}/>
+                    handleRemove={this.handleRemove}
+                    />
+                <div className="bottom">
+                    <Result itemList={this.state.itemList}/>
+                    <Input inputSubmit={this.inputSubmit}/>
+                </div>
             </div>
         );
     }

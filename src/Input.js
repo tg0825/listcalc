@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './Input.scss';
 class Input extends Component {
     constructor(props) {
         super(props);
@@ -44,36 +45,43 @@ class Input extends Component {
 
     render() {
         return(
-            <div>
-                <input
-                    placeholder="이름"
-                    name="name"
-                    type="text"
-                    value={this.state.name}
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleKeyPress}
-                    ref={ref => this.name = ref}
-                    required
-                />
+            <div className="cpt-input">
+                <div className="input-text input-name">
+                    <input
+                        placeholder="이름"
+                        name="name"
+                        type="text"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
+                        ref={ref => this.name = ref}
+                        required
+                    />
+                </div>
 
-                <input
-                    placeholder="금액"
-                    name="price"
-                    type="number"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    value={this.state.price}
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleKeyPress}
-                    ref={ref => this.price = ref}
-                    required
-                />
-                <button
-                    type="submit"
-                    onClick={this.handleButtonClick}
-                >
-                    submit
-                </button>
+                <div className="input-text input-price">
+                    <input
+                        placeholder="금액"
+                        name="price"
+                        type="number"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        value={this.state.price}
+                        onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
+                        ref={ref => this.price = ref}
+                        required
+                    />
+                </div>
+
+                <div className="btn-submit">
+                    <button
+                        type="submit"
+                        onClick={this.handleButtonClick}
+                    >
+                        submit
+                    </button>
+                </div>
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './List.scss';
 class List extends Component {
     constructor(props) {
         super(props);
@@ -9,9 +10,8 @@ class List extends Component {
         const eTarget = e.currentTarget;
         const name = eTarget.name;
         const value = eTarget.value;
-        const index = i;
 
-        this.props.handleEdit(name, value, index);
+        this.props.handleEdit(name, value, i);
     }
 
     render () {
@@ -19,28 +19,44 @@ class List extends Component {
             return item.map((k, i) => (
                 <div
                     key={i}
+                    className="row"
                 >
-                    <input
-                        placeholder="이름"
-                        name="name"
-                        type="text"
-                        value={k.name}
-                        onChange={(e)=>this.handleChange(e, i)}
-                    />
-                    <input
-                        placeholder="금액"
-                        name="price"
-                        type="text"
-                        value={k.price}
-                        onChange={this.handleChange}
-                    />
+                    <div className="cell cell-number">
+                        {i + 1}
+                    </div>
+                    <div className="cell cell-name">
+                        <input
+                            placeholder="이름"
+                            name="name"
+                            type="text"
+                            value={k.name}
+                            onChange={(e)=>this.handleChange(e, i)}
+                        />
+                    </div>
+                    <div className="cell cell-price">
+                        <input
+                            placeholder="금액"
+                            name="price"
+                            type="text"
+                            value={k.price}
+                            onChange={(e)=>this.handleChange(e, i)}
+                        />
+                    </div>
+                    <div className="cell cell-button">
+                        <button
+                            type="button"
+                            onClick={(e)=>this.props.handleRemove(e, i)}
+                        > X </button>
+                    </div>
                 </div>
             ));
         }
 
         return (
-            <div>
-                {map(this.props.itemList)}
+            <div className="cpt-list">
+                <div className="list-inner">
+                    {map(this.props.itemList)}
+                </div>
             </div>
         )
     }

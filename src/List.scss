@@ -1,0 +1,63 @@
+.cpt-list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 160px;
+    // width: 100%;
+    // height: 70vh;
+    border-bottom: 1px solid #ccc;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .list-inner {
+        display: table;
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .row {
+        display: table-row;
+    }
+
+    .cell {
+        display: table-cell;
+        border: 1px solid #EEE;
+        background: #FFF;
+        font-size: 14px;
+
+        input {
+            border: 0;
+            background: none;
+            width: 100%;
+            font-size: inherit;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+    }
+
+    .cell-number {
+        width: 50px;
+    }
+
+    .cell-price {
+        input {
+            text-align: right;
+        }
+    }
+
+    .cell-button {
+        width: 35px;
+        height: 35px;
+
+        button {
+            width: 100%;
+            border: 1px solid #e5e5e5;
+            background: #eee;
+            height: 100%;
+            font-size: 14px;
+            color: #555;
+        }
+    }
+}
