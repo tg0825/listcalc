@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import List from './List';
 import Result from './Result';
 import Input from './Input';
-import logo from './logo.svg';
-import './App.css';
+// import { Map, List } from 'immutable';
+import update from 'immutability-helper';
+import './App.scss';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.inputSubmit = this.inputSubmit.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     state = {
@@ -32,13 +34,29 @@ class App extends Component {
     inputSubmit(item) {
         this.setState({
             itemList: [...this.state.itemList, item]
+        });
+    }
+
+    handleEdit(name, value, index) {
+        this.setState({
+            itemList: update(
+                this.state.itemList,
+                {
+                    [index]: {
+                        name: {$set: value},
+                    }
+                }
+            )
         })
     }
 
     render() {
         return (
             <div className="App">
-                <List itemList={this.state.itemList}/>
+                <List
+                    itemList={this.state.itemList}
+                    handleEdit={this.handleEdit}
+                />
                 <Result itemList={this.state.itemList}/>
                 <Input inputSubmit={this.inputSubmit}/>
             </div>
