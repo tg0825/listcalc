@@ -1,14 +1,15 @@
 .cpt-list {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 160px;
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    // bottom: 160px;
     // width: 100%;
     // height: 70vh;
-    border-bottom: 1px solid #ccc;
-    overflow-x: hidden;
-    overflow-y: auto;
+    // border-bottom: 1px solid #ccc;
+    // overflow-x: hidden;
+    // overflow-y: auto;
+    min-height: 200px;
 
     .list-inner {
         display: table;
@@ -17,8 +18,27 @@
         table-layout: fixed;
     }
 
+    &.empty {
+        .list-inner-empty {
+            display: block;
+        }
+    }
+
+    .list-inner-empty {
+        text-align: center;
+        height: 200px;
+        padding: 80px 0 0;
+        color: #aaa;
+        display: none;
+        box-sizing: border-box;
+    }
+
     .row {
         display: table-row;
+
+        &:nth-child(even) div {
+            background: #f8f8f8;
+        }
     }
 
     .cell {
@@ -38,7 +58,8 @@
     }
 
     .cell-number {
-        width: 50px;
+        width: 40px;
+        padding-left: 10px;
     }
 
     .cell-price {

@@ -5740,6 +5740,10 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-currency@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-currency/-/react-currency-2.0.0.tgz#86adad7f9e10571ce1d0054f7869a45c1b0b6ba0"
+
 react-dev-utils@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-5.0.1.tgz#1f396e161fe44b595db1b186a40067289bf06613"

@@ -4,6 +4,7 @@ class List extends Component {
     render () {
         const count = this.props.itemList.length;
         const Result = (item) => {
+            if (count == 0) return 0;
             var priceList = item.map((key, i) => [key.price]);
             return priceList.reduce((a, b) => {
                 return +a + +b;

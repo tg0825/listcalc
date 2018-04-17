@@ -17,96 +17,40 @@ class App extends Component {
 
     state = {
         itemList: [
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '커피',
-                price: '1000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            },
-            {
-                name: '점심',
-                price: '2000'
-            }
+            // {
+            //     name: '커피',
+            //     price: '1000'
+            // },
         ],
         totalPrice: 0
+    }
+
+    getLocalStorage() {
+        const itemList = localStorage.itemList;
+
+        if (itemList) {
+            this.setState({
+                itemList: JSON.parse(itemList)
+            });
+        } else {
+            localStorage.itemList = JSON.stringify(this.state.itemList);
+        }
+    }
+
+    // 1. 돔 전, 돔 처리 불가
+    componentWillMount() {
+        if (this.state.itemList.length == 0) {
+
+        } 
+        this.getLocalStorage();
+    }
+
+    // 6. 업데이트 후
+    componentDidUpdate(prevProps, prevState) {
+        // 이전 값과 지금 값을 비교
+        if (JSON.stringify(prevState.itemList) != JSON.stringify(this.state.itemList)) {
+            localStorage.itemList = JSON.stringify(this.state.itemList);
+        }
     }
 
     inputSubmit(item) {

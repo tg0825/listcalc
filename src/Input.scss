@@ -15,17 +15,16 @@
     }
 
     input {
-        background: none;
-        border: 0;
-        border-bottom: 1px solid #ccc;
-        font-size: 16px;
-        padding: 10px;
+        border: 1px solid #ccc;
+        font-size: 20px;
+        padding: 15px;
         width: 100%;
         box-sizing: border-box;
         border-radius: 0;
     }
 
     .input-name input {
+        text-align: center;
     }
 
     .input-price input {

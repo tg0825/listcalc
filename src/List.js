@@ -53,9 +53,13 @@ class List extends Component {
         }
 
         return (
-            <div className="cpt-list">
+            <div className={"cpt-list " + (this.props.itemList.length ? '' : 'empty')}>
                 <div className="list-inner">
                     {map(this.props.itemList)}
+                </div>
+
+                <div className="list-inner-empty">
+                    항목을 입력해주세요. :)
                 </div>
             </div>
         )
