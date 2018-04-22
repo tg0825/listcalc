@@ -8,7 +8,7 @@
     clear: both;
 
     .input-text {
-        width: 50%;
+        width: 33.334%;
         padding: 10px;
         box-sizing: border-box;
         float: left;
@@ -24,6 +24,10 @@
     }
 
     .input-name input {
+        text-align: center;
+    }
+
+    .input-count input {
         text-align: center;
     }
 

@@ -5,16 +5,29 @@ class Input extends Component {
         super(props);
         this.state = {
             name: '',
+            count: 1,
             price: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
     }
+    // example
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.value > prevState.value) {
+            this.foo();
+        }
+    }
 
     handleChange(e) {
         let newItem = {};
         newItem[e.target.name] = e.target.value;
+
+        // 갯수는 0개 불가
+        if (e.target.name === 'count' && e.target.value === '0') {
+            newItem[e.target.name] = 1;
+        }
+
         this.setState(newItem);
     }
 
@@ -32,6 +45,7 @@ class Input extends Component {
             this.name.focus();
             this.setState({
                 name: '',
+                count: 1,
                 price: ''
             });
         }
@@ -70,6 +84,21 @@ class Input extends Component {
                         onChange={this.handleChange}
                         onKeyPress={this.handleKeyPress}
                         ref={ref => this.price = ref}
+                        required
+                    />
+                </div>
+
+                <div className="input-text input-count">
+                    <input
+                        placeholder="count"
+                        name="count"
+                        type="number"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        value={this.state.count}
+                        onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
+                        ref={ref => this.count = ref}
                         required
                     />
                 </div>

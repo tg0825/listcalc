@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import List from './List';
 import Result from './Result';
 import Input from './Input';
-// import { Map, List } from 'immutable';
+import InputType from './InputType';
 import update from 'immutability-helper';
 import './App.scss';
 
@@ -14,6 +14,7 @@ class App extends Component {
         this.handleEdit = this.handleEdit.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.handleClone = this.handleClone.bind(this);
+        this.handleTypeChange = this.handleTypeChange.bind(this);
     }
 
     state = {
@@ -21,10 +22,12 @@ class App extends Component {
             // {
             //     name: '커피',
             //     price: '1000'
+            //     type: 'dec'
             //     ea: 1
             // },
         ],
-        totalPrice: 0
+        totalPrice: 0,
+        selectedType: 'dec'
     }
 
     getLocalStorage() {
@@ -56,6 +59,10 @@ class App extends Component {
     }
 
     inputSubmit(item) {
+        if (this.state.selectedType === 'dec') {
+            item.price *= -1;
+        }
+
         this.setState({
             itemList: [...this.state.itemList, item]
         });
@@ -95,6 +102,12 @@ class App extends Component {
         })
     }
 
+    handleTypeChange(type) {
+        this.setState({
+            selectedType: type
+        });
+    }
+
     render() {
         return (
             <div className="App">
@@ -106,7 +119,13 @@ class App extends Component {
                 />
                 <div className="bottom">
                     <Result itemList={this.state.itemList}/>
-                    <Input inputSubmit={this.inputSubmit}/>
+                    <InputType
+                        handleTypeChange={this.handleTypeChange}
+                    />
+                    <Input
+                        inputSubmit={this.inputSubmit}
+                        selectedType={this.state.selectedType}
+                    />
                 </div>
             </div>
         );

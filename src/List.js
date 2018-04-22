@@ -30,6 +30,17 @@ class List extends Component {
                             name="name"
                             type="text"
                             value={k.name}
+                            required
+                            onChange={(e)=>this.handleChange(e, i)}
+                        />
+                    </div>
+                    <div className="cell cell-type">
+                        <input
+                            placeholder="type"
+                            name="type"
+                            type="text"
+                            value={k.type}
+                            required
                             onChange={(e)=>this.handleChange(e, i)}
                         />
                     </div>
@@ -39,6 +50,19 @@ class List extends Component {
                             name="price"
                             type="text"
                             value={k.price}
+                            required
+                            onChange={(e)=>this.handleChange(e, i)}
+                        />
+                    </div>
+                    <div className="cell cell-count">
+                        <input
+                            placeholder="count"
+                            name="count"
+                            type="number"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            value={k.count}
+                            required
                             onChange={(e)=>this.handleChange(e, i)}
                         />
                     </div>
@@ -46,14 +70,14 @@ class List extends Component {
                         <button
                             type="button"
                             onClick={(e)=>this.props.handleClone(i)}
-                        ><i class="fa fa-clipboard" aria-hidden="true"></i>
+                        ><i className="fa fa-clipboard" aria-hidden="true"></i>
                         </button>
                     </div>
                     <div className="cell cell-button">
                         <button
                             type="button"
                             onClick={(e)=>this.props.handleRemove(e, i)}
-                        ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        ><i className="fa fa-trash" aria-hidden="true"></i></button>
                     </div>
                 </div>
             ));

@@ -5,7 +5,12 @@ class List extends Component {
         const count = this.props.itemList.length;
         const Result = (item) => {
             if (count == 0) return 0;
-            var priceList = item.map((key, i) => [key.price]);
+            // const priceList = item.map((key, i) => [key.price]);
+            const priceList = item.map((key, i) => {
+                const rowTotalPrice = key.price * key.count;
+                return rowTotalPrice;
+            });
+
             return priceList.reduce((a, b) => {
                 return +a + +b;
             });
