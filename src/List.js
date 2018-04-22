@@ -45,8 +45,15 @@ class List extends Component {
                     <div className="cell cell-button">
                         <button
                             type="button"
+                            onClick={(e)=>this.props.handleClone(i)}
+                        ><i class="fa fa-clipboard" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div className="cell cell-button">
+                        <button
+                            type="button"
                             onClick={(e)=>this.props.handleRemove(e, i)}
-                        > X </button>
+                        ><i class="fa fa-trash" aria-hidden="true"></i></button>
                     </div>
                 </div>
             ));

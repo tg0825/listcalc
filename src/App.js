@@ -13,6 +13,7 @@ class App extends Component {
         this.inputSubmit = this.inputSubmit.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
+        this.handleClone = this.handleClone.bind(this);
     }
 
     state = {
@@ -20,6 +21,7 @@ class App extends Component {
             // {
             //     name: '커피',
             //     price: '1000'
+            //     ea: 1
             // },
         ],
         totalPrice: 0
@@ -39,16 +41,16 @@ class App extends Component {
 
     // 1. 돔 전, 돔 처리 불가
     componentWillMount() {
-        if (this.state.itemList.length == 0) {
+        if (this.state.itemList.length === 0) {
 
-        } 
+        }
         this.getLocalStorage();
     }
 
     // 6. 업데이트 후
     componentDidUpdate(prevProps, prevState) {
         // 이전 값과 지금 값을 비교
-        if (JSON.stringify(prevState.itemList) != JSON.stringify(this.state.itemList)) {
+        if (JSON.stringify(prevState.itemList) !== JSON.stringify(this.state.itemList)) {
             localStorage.itemList = JSON.stringify(this.state.itemList);
         }
     }
@@ -69,9 +71,22 @@ class App extends Component {
         })
     }
 
+    handleClone(index) {
+        const cloneItem = Object.assign({}, this.state.itemList[index]);
+
+        this.setState({
+            itemList: update(this.state.itemList,
+                {
+                    $splice: [[index + 1 , 0, cloneItem]]
+                }
+            )
+        })
+    }
+
     handleEdit(name, value, index) {
         this.setState({
-            itemList: update(this.state.itemList, {
+            itemList: update(this.state.itemList,
+                {
                     [index]: {
                         [name]: {$set: value},
                     }
@@ -87,7 +102,8 @@ class App extends Component {
                     itemList={this.state.itemList}
                     handleEdit={this.handleEdit}
                     handleRemove={this.handleRemove}
-                    />
+                    handleClone={this.handleClone}
+                />
                 <div className="bottom">
                     <Result itemList={this.state.itemList}/>
                     <Input inputSubmit={this.inputSubmit}/>
