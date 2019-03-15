@@ -4,5 +4,17 @@ import './index.css';
 import 'font-awesome/css/font-awesome.min.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-ReactDOM.render(<App />, document.getElementById('root'));
+
+import modules from './module';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+const store = createStore(modules);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+);
 registerServiceWorker();

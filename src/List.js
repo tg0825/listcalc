@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './List.scss';
 class List extends Component {
     constructor(props) {
@@ -14,16 +14,11 @@ class List extends Component {
         this.props.handleEdit(name, value, i);
     }
 
-    render () {
-        const map = (item) => {
+    render() {
+        const map = item => {
             return item.map((k, i) => (
-                <div
-                    key={i}
-                    className="row"
-                >
-                    <div className="cell cell-number">
-                        {i + 1}
-                    </div>
+                <div key={i} className="row">
+                    <div className="cell cell-number">{i + 1}</div>
                     <div className="cell cell-name">
                         <input
                             placeholder="이름"
@@ -31,7 +26,7 @@ class List extends Component {
                             type="text"
                             value={k.name}
                             required
-                            onChange={(e)=>this.handleChange(e, i)}
+                            onChange={e => this.handleChange(e, i)}
                         />
                     </div>
                     <div className="cell cell-type">
@@ -41,7 +36,7 @@ class List extends Component {
                             type="text"
                             value={k.type}
                             required
-                            onChange={(e)=>this.handleChange(e, i)}
+                            onChange={e => this.handleChange(e, i)}
                         />
                     </div>
                     <div className="cell cell-price">
@@ -51,7 +46,7 @@ class List extends Component {
                             type="text"
                             value={k.price}
                             required
-                            onChange={(e)=>this.handleChange(e, i)}
+                            onChange={e => this.handleChange(e, i)}
                         />
                     </div>
                     <div className="cell cell-count">
@@ -63,37 +58,40 @@ class List extends Component {
                             pattern="[0-9]*"
                             value={k.count}
                             required
-                            onChange={(e)=>this.handleChange(e, i)}
+                            onChange={e => this.handleChange(e, i)}
                         />
                     </div>
                     <div className="cell cell-button">
                         <button
                             type="button"
-                            onClick={(e)=>this.props.handleClone(i)}
-                        ><i className="fa fa-clipboard" aria-hidden="true"></i>
+                            onClick={e => this.props.handleClone(i)}
+                        >
+                            <i className="fa fa-clipboard" aria-hidden="true" />
                         </button>
                     </div>
                     <div className="cell cell-button">
                         <button
                             type="button"
-                            onClick={(e)=>this.props.handleRemove(e, i)}
-                        ><i className="fa fa-trash" aria-hidden="true"></i></button>
+                            onClick={e => this.props.handleRemove(e, i)}
+                        >
+                            <i className="fa fa-trash" aria-hidden="true" />
+                        </button>
                     </div>
                 </div>
             ));
-        }
+        };
 
         return (
-            <div className={"cpt-list " + (this.props.itemList.length ? '' : 'empty')}>
-                <div className="list-inner">
-                    {map(this.props.itemList)}
-                </div>
+            <div
+                className={
+                    'cpt-list ' + (this.props.itemList.length ? '' : 'empty')
+                }
+            >
+                <div className="list-inner">{map(this.props.itemList)}</div>
 
-                <div className="list-inner-empty">
-                    항목을 입력해주세요. :)
-                </div>
+                <div className="list-inner-empty">항목을 입력해주세요. :)</div>
             </div>
-        )
+        );
     }
 }
 export default List;

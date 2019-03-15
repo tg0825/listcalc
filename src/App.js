@@ -6,6 +6,8 @@ import InputType from './InputType';
 import update from 'immutability-helper';
 import './App.scss';
 
+import { connect } from 'react-redux';
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -15,19 +17,19 @@ class App extends Component {
         this.handleRemove = this.handleRemove.bind(this);
         this.handleClone = this.handleClone.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
-    }
 
-    state = {
-        itemList: [
-            // {
-            //     name: '커피',
-            //     price: '1000'
-            //     type: 'dec'
-            //     ea: 1
-            // },
-        ],
-        totalPrice: 0,
-        selectedType: 'dec'
+        this.state = {
+            itemList: [
+                // {
+                //     name: '커피',
+                //     price: '1000'
+                //     type: 'dec'
+                //     ea: 1
+                // },
+            ],
+            totalPrice: 0,
+            selectedType: 'dec'
+        };
     }
 
     getLocalStorage() {
@@ -45,7 +47,6 @@ class App extends Component {
     // 1. 돔 전, 돔 처리 불가
     componentWillMount() {
         if (this.state.itemList.length === 0) {
-
         }
         this.getLocalStorage();
     }
@@ -53,7 +54,10 @@ class App extends Component {
     // 6. 업데이트 후
     componentDidUpdate(prevProps, prevState) {
         // 이전 값과 지금 값을 비교
-        if (JSON.stringify(prevState.itemList) !== JSON.stringify(this.state.itemList)) {
+        if (
+            JSON.stringify(prevState.itemList) !==
+            JSON.stringify(this.state.itemList)
+        ) {
             localStorage.itemList = JSON.stringify(this.state.itemList);
         }
     }
@@ -70,36 +74,30 @@ class App extends Component {
 
     handleRemove(e, index) {
         this.setState({
-            itemList: update(this.state.itemList,
-                {
-                    $splice: [[index, 1]]
-                }
-            )
-        })
+            itemList: update(this.state.itemList, {
+                $splice: [[index, 1]]
+            })
+        });
     }
 
     handleClone(index) {
         const cloneItem = Object.assign({}, this.state.itemList[index]);
 
         this.setState({
-            itemList: update(this.state.itemList,
-                {
-                    $splice: [[index + 1 , 0, cloneItem]]
-                }
-            )
-        })
+            itemList: update(this.state.itemList, {
+                $splice: [[index + 1, 0, cloneItem]]
+            })
+        });
     }
 
     handleEdit(name, value, index) {
         this.setState({
-            itemList: update(this.state.itemList,
-                {
-                    [index]: {
-                        [name]: {$set: value},
-                    }
+            itemList: update(this.state.itemList, {
+                [index]: {
+                    [name]: { $set: value }
                 }
-            )
-        })
+            })
+        });
     }
 
     handleTypeChange(type) {
@@ -109,6 +107,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="App">
                 <List
@@ -118,10 +117,8 @@ class App extends Component {
                     handleClone={this.handleClone}
                 />
                 <div className="bottom">
-                    <Result itemList={this.state.itemList}/>
-                    <InputType
-                        handleTypeChange={this.handleTypeChange}
-                    />
+                    <Result itemList={this.state.itemList} />
+                    <InputType handleTypeChange={this.handleTypeChange} />
                     <Input
                         inputSubmit={this.inputSubmit}
                         selectedType={this.state.selectedType}
@@ -132,4 +129,7 @@ class App extends Component {
     }
 }
 
-export default App;
+const con = connect(state => ({
+    input: state.input
+}))(App);
+export default con;

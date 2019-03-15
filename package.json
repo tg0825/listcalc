@@ -40,6 +40,8 @@
     "react-currency": "^2.0.0",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.3.1",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
     "resolve": "1.6.0",
     "sass-loader": "^7.0.1",
     "style-loader": "0.19.0",
