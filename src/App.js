@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+
+import Tmpl from './component/Tmpl';
 import List from './List';
-import Result from './Result';
 import Input from './Input';
 import InputType from './InputType';
 import update from 'immutability-helper';
@@ -107,23 +108,21 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="App">
-                <List
-                    itemList={this.state.itemList}
-                    handleEdit={this.handleEdit}
-                    handleRemove={this.handleRemove}
-                    handleClone={this.handleClone}
-                />
-                <div className="bottom">
-                    <Result itemList={this.state.itemList} />
+                <Tmpl>
+                    <List
+                        itemList={this.state.itemList}
+                        handleEdit={this.handleEdit}
+                        handleRemove={this.handleRemove}
+                        handleClone={this.handleClone}
+                    />
                     <InputType handleTypeChange={this.handleTypeChange} />
                     <Input
                         inputSubmit={this.inputSubmit}
                         selectedType={this.state.selectedType}
                     />
-                </div>
+                </Tmpl>
             </div>
         );
     }
@@ -132,4 +131,5 @@ class App extends Component {
 const con = connect(state => ({
     input: state.input
 }))(App);
+
 export default con;
