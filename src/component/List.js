@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import './List.scss';
+
 class List extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleEdit(name, value, index) {
+        this.setState({
+            itemList: update(this.state.itemList, {
+                [index]: {
+                    [name]: { $set: value }
+                }
+            })
+        });
     }
 
     handleChange(e, i) {
@@ -94,4 +107,12 @@ class List extends Component {
         );
     }
 }
-export default List;
+
+const con = connect(
+    state => ({
+        itemList: state.list.itemList
+    }),
+    dispatch => ({})
+)(List);
+
+export default con;

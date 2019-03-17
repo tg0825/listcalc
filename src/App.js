@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import Tmpl from './component/Tmpl';
-import List from './List';
-import Input from './Input';
+import List from './component/List';
+import Input from './component/Input';
 import InputType from './InputType';
 import update from 'immutability-helper';
 import './App.scss';
@@ -14,7 +14,7 @@ class App extends Component {
         super(props);
 
         this.inputSubmit = this.inputSubmit.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
+        // this.handleEdit = this.handleEdit.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.handleClone = this.handleClone.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
@@ -63,6 +63,7 @@ class App extends Component {
         }
     }
 
+    // 값 입력
     inputSubmit(item) {
         if (this.state.selectedType === 'dec') {
             item.price *= -1;
@@ -91,16 +92,6 @@ class App extends Component {
         });
     }
 
-    handleEdit(name, value, index) {
-        this.setState({
-            itemList: update(this.state.itemList, {
-                [index]: {
-                    [name]: { $set: value }
-                }
-            })
-        });
-    }
-
     handleTypeChange(type) {
         this.setState({
             selectedType: type
@@ -111,17 +102,17 @@ class App extends Component {
         return (
             <div className="App">
                 <Tmpl>
-                    <List
-                        itemList={this.state.itemList}
-                        handleEdit={this.handleEdit}
-                        handleRemove={this.handleRemove}
-                        handleClone={this.handleClone}
-                    />
+                    {/*
+                        <List
+                            itemList={this.state.itemList}
+                            handleEdit={this.handleEdit}
+                            handleRemove={this.handleRemove}
+                            handleClone={this.handleClone}
+                        />
+                         */}
+                    <List />
                     <InputType handleTypeChange={this.handleTypeChange} />
-                    <Input
-                        inputSubmit={this.inputSubmit}
-                        selectedType={this.state.selectedType}
-                    />
+                    <Input />
                 </Tmpl>
             </div>
         );

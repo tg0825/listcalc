@@ -31,7 +31,7 @@ class Result extends Component {
 }
 
 const con = connect(state => ({
-    list: state.list,
+    list: state.list.itemList,
     result: state.result
 }))(Result);
 
