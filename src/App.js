@@ -14,9 +14,7 @@ class App extends Component {
         super(props);
 
         this.inputSubmit = this.inputSubmit.bind(this);
-        // this.handleEdit = this.handleEdit.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
-        this.handleClone = this.handleClone.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
 
         this.state = {
@@ -82,16 +80,6 @@ class App extends Component {
         });
     }
 
-    handleClone(index) {
-        const cloneItem = Object.assign({}, this.state.itemList[index]);
-
-        this.setState({
-            itemList: update(this.state.itemList, {
-                $splice: [[index + 1, 0, cloneItem]]
-            })
-        });
-    }
-
     handleTypeChange(type) {
         this.setState({
             selectedType: type
@@ -102,14 +90,6 @@ class App extends Component {
         return (
             <div className="App">
                 <Tmpl>
-                    {/*
-                        <List
-                            itemList={this.state.itemList}
-                            handleEdit={this.handleEdit}
-                            handleRemove={this.handleRemove}
-                            handleClone={this.handleClone}
-                        />
-                         */}
                     <List />
                     <InputType handleTypeChange={this.handleTypeChange} />
                     <Input />
