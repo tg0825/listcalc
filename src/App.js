@@ -1,33 +1,34 @@
 import React, { Component } from 'react';
-import List from './List';
-import Result from './Result';
-import Input from './Input';
+
+import Tmpl from './component/Tmpl';
+import List from './component/List';
+import Input from './component/Input';
 import InputType from './InputType';
 import update from 'immutability-helper';
 import './App.scss';
+
+import { connect } from 'react-redux';
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.inputSubmit = this.inputSubmit.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
-        this.handleClone = this.handleClone.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
-    }
 
-    state = {
-        itemList: [
-            // {
-            //     name: '커피',
-            //     price: '1000'
-            //     type: 'dec'
-            //     ea: 1
-            // },
-        ],
-        totalPrice: 0,
-        selectedType: 'dec'
+        this.state = {
+            itemList: [
+                // {
+                //     name: '커피',
+                //     price: '1000'
+                //     type: 'dec'
+                //     ea: 1
+                // },
+            ],
+            totalPrice: 0,
+            selectedType: 'dec'
+        };
     }
 
     getLocalStorage() {
@@ -45,7 +46,6 @@ class App extends Component {
     // 1. 돔 전, 돔 처리 불가
     componentWillMount() {
         if (this.state.itemList.length === 0) {
-
         }
         this.getLocalStorage();
     }
@@ -53,11 +53,15 @@ class App extends Component {
     // 6. 업데이트 후
     componentDidUpdate(prevProps, prevState) {
         // 이전 값과 지금 값을 비교
-        if (JSON.stringify(prevState.itemList) !== JSON.stringify(this.state.itemList)) {
+        if (
+            JSON.stringify(prevState.itemList) !==
+            JSON.stringify(this.state.itemList)
+        ) {
             localStorage.itemList = JSON.stringify(this.state.itemList);
         }
     }
 
+    // 값 입력
     inputSubmit(item) {
         if (this.state.selectedType === 'dec') {
             item.price *= -1;
@@ -70,36 +74,10 @@ class App extends Component {
 
     handleRemove(e, index) {
         this.setState({
-            itemList: update(this.state.itemList,
-                {
-                    $splice: [[index, 1]]
-                }
-            )
-        })
-    }
-
-    handleClone(index) {
-        const cloneItem = Object.assign({}, this.state.itemList[index]);
-
-        this.setState({
-            itemList: update(this.state.itemList,
-                {
-                    $splice: [[index + 1 , 0, cloneItem]]
-                }
-            )
-        })
-    }
-
-    handleEdit(name, value, index) {
-        this.setState({
-            itemList: update(this.state.itemList,
-                {
-                    [index]: {
-                        [name]: {$set: value},
-                    }
-                }
-            )
-        })
+            itemList: update(this.state.itemList, {
+                $splice: [[index, 1]]
+            })
+        });
     }
 
     handleTypeChange(type) {
@@ -111,25 +89,18 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <List
-                    itemList={this.state.itemList}
-                    handleEdit={this.handleEdit}
-                    handleRemove={this.handleRemove}
-                    handleClone={this.handleClone}
-                />
-                <div className="bottom">
-                    <Result itemList={this.state.itemList}/>
-                    <InputType
-                        handleTypeChange={this.handleTypeChange}
-                    />
-                    <Input
-                        inputSubmit={this.inputSubmit}
-                        selectedType={this.state.selectedType}
-                    />
-                </div>
+                <Tmpl>
+                    <List />
+                    <InputType handleTypeChange={this.handleTypeChange} />
+                    <Input />
+                </Tmpl>
             </div>
         );
     }
 }
 
-export default App;
+const con = connect(state => ({
+    input: state.input
+}))(App);
+
+export default con;
